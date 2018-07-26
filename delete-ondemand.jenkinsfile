@@ -1,0 +1,21 @@
+pipeline {
+  agent any
+  parameters {
+    string(name: 'BRANCH', defaultValue: 'puma', description: 'This is the source branch for the build')
+  }
+  stages {
+    stage('CleanUp') {
+      steps {
+        script {
+          openshift.withCluster() {
+              openshift.withProject() {
+                def APP_NAME="pingapp-${params.BRANCH}"
+                openshift.raw('delete', 'all',"-l app ${APP_NAME}")
+                openshift.raw('delete', 'cm',"-l app ${APP_NAME}")
+            }            
+          }
+        }
+      }
+    }
+  }
+}
