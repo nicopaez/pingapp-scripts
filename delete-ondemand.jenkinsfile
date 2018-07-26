@@ -10,8 +10,8 @@ pipeline {
           openshift.withCluster() {
               openshift.withProject() {
                 def APP_NAME="pingapp-${params.BRANCH}"
-                openshift.raw('delete', 'all',"-l app ${APP_NAME}")
-                openshift.raw('delete', 'cm',"-l app ${APP_NAME}")
+                openshift.raw('delete', 'all',"-l app=${APP_NAME}")
+                openshift.raw('delete', 'cm',"-l app=${APP_NAME}")
             }            
           }
         }
