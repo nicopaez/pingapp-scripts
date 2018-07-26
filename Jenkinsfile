@@ -26,8 +26,7 @@ pipeline {
 
                 def dcpatch = [
                   "metadata":[
-                    "name":"pingapp-${params.BRANCH}",
-                    "namespace":"test"
+                    "name":"pingapp-${params.BRANCH}"
                   ],
                   "apiVersion":"apps.openshift.io/v1",
                   "kind":"DeploymentConfig",
