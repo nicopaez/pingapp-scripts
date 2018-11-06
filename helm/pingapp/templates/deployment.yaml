@@ -39,15 +39,15 @@ spec:
               path: /
               port: 4567
           volumeMounts:
-            - mountPath: /config/config.json
-              name: config-volume
+            - name: config-volume
+              mountPath: /config
           resources:
 {{ toYaml .Values.resources | indent 12 }}
-    {{- with .Values.nodeSelector }}
       volumes:
         - name: config-volume
-          configMap: 
-            name: {{ include "pingapp.fullname" . }}-config
+          configMap:
+            name: {{ template "pingapp.fullname" . }}-config
+    {{- with .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}
     {{- end }}
