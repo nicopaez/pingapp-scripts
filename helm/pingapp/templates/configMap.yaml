@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "pingapp.fullname" . }}-config
+  labels:
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    app: {{ template "pingapp.name" . }}
+data:
+    config.json: |-
+      {
+        "key1" : "some value - test",
+        "key2" : "demo fiuba",
+        "env": "test"
+      }
